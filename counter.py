@@ -32,19 +32,22 @@ def update_counter(file_name, reset=False):
     >>> update_counter('blah2.txt')
     2
     """
+    # Test if the file needs to be read
     if exists(file_name) is False or reset is True:
-        fout = open(file_name, 'wb')
+        fout = open(file_name, 'wb')    # opening a writing file
         counter = 1
-        pickle.dump(counter, fout)
+        pickle.dump(counter, fout)     # storing counter as bits in file_name
         return counter
 
+        # Read and write to the file
     else:
-        fin = open(file_name, 'rb')
+        fin = open(file_name, 'rb')     # opening a reading file
         counter = pickle.load(fin)
-        counter += 1
-        finw = open(file_name, 'wb')
+        counter += 1                    # Increasing counter by 1
+        finw = open(file_name, 'wb')    # opening a writing file
         pickle.dump(counter, finw)
-    fin.close()
+    fin.close()                         # clean up
+    finw.close()
     return(counter)
 
 
